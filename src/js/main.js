@@ -12,7 +12,7 @@ const serverURL = `https://api.disneyapi.dev/character?page=50`;
 
 let disneyDataList = [];
 
-// FETCH
+//FETCH
 fetch(serverURL)
   .then((response) => response.json())
   .then((listData) => {
@@ -27,8 +27,8 @@ fetch(serverURL)
 
 function renderOneCharacter() {
   let html = `<li id="${disneyDataList.__id}" class="card">
-                <article>
-                    <img class="character__img js_img" src="url${disneyDataList.imageUrl}" alt="Disney Characters" />
+                <article class="character__box">
+                    <img class="character__img js_img" src="${disneyDataList.imageUrl}" alt="Disney Characters" />
                     <p class="character__name js_name">${disneyDataList.name}</p>
                 </article>
             </li>`;

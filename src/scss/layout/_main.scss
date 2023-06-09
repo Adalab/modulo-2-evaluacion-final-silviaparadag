@@ -40,5 +40,11 @@
 
 .section2 {
     &__title {
-    color: purple;
+    color: purple;  
 }}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
