@@ -1,0 +1,13 @@
+.footer {
+    width: 100%;
+    background-color: purple;
+    color: white;
+    height: 30px;
+    font-family: $font-main;
+    font-size: 0.8rem ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+}

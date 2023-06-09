@@ -1,0 +1,44 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.section1{
+    width: 70vw;
+    height: 70px;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: purple;
+    background-color: white;
+    box-shadow: 0 2px 4px lightpink;
+    //border: 3px yellow dotted;
+    margin-top: -35px;
+}
+
+.form {
+    &__input--search {
+        width: 40vw;
+        height: 30px;
+        border: 2px purple dotted;
+    }
+
+    &__input--btn {
+        width: 80px;
+        height: 30px;
+        background-color: purple;
+        color: white;
+        border-radius: 15px;
+        border: none;
+    }
+}
+
+.section2 {
+    &__title {
+    color: purple;
+}}
