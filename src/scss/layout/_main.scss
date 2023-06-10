@@ -7,7 +7,7 @@
 }
 
 
-.section1{
+.section1 {
     width: 70vw;
     height: 70px;
     font-size: 2rem;
@@ -39,12 +39,37 @@
 }
 
 .section2 {
+    padding: 10px 0 40px;
+    text-align: center;
+
     &__title {
-    color: purple;  
-}}
+        color: purple;
+        padding-bottom: 15px;
+    }
+}
 
 .list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
+}
+
+.card {
+    width: 250px;
+    height: 350px;
+    box-shadow: 0 1px 2px lightpink;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    text-align: center;
+}
+
+.character__img {
+    width: 80%;
+    height: 250px;
+    object-fit: cover;
 }
