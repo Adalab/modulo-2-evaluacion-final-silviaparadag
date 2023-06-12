@@ -2,18 +2,19 @@
     width: 100%;
 
     &__bgd {
-    height: 500px;
-    background-image: url("../images/cover.jpeg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+        height: 500px;
+        background-image: url("../images/cover.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
     }
+
     &__logo {
-    width: 50px;
-    height: 50px;
-    position: fixed;
-    top: 0;
-    z-index: 99;
-    padding: 5px 5px;
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        z-index: 99;
+        padding: 5px 5px;
     }
 }

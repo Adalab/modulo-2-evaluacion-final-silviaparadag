@@ -8,18 +8,22 @@ const cardListFav = document.querySelector('.js_list_fav');
 const cardElem = document.querySelector('.js_card');
 const inputSearch = document.querySelector('.js_inputSearch');
 const btnSearch = document.querySelector('.js_btnSearch');
+const resetBtn  = document.querySelector('.js_resetBtn');
+//const deleteFavBtn = document.querySelector('.js_close-btn');
 
 
-console.log(cardElem);
 
-// VARIABLES
+// VARIABLES API
 const serverURL = `https://api.disneyapi.dev/character?page=50`;
-//const serverSearchURL = `https://api.disneyapi.dev/character?pageSize=50&name=`;
+const serverSearchURL = `https://api.disneyapi.dev/character?pageSize=50&name=`;
+const emptyURL = `https://via.placeholder.com/210x295/fbebf9/555555/?text=Disney%20character%20image%20not%20avaliable`;
 
+// VARIABLES globales
 let disneyDataList = [];
 let disneyDataListFav = [];
 
 
+// VARIABLES LS
 const setInLocalStorage = () => {
   localStorage.setItem('lsFavCards', JSON.stringify(disneyDataListFav));
 };
@@ -64,8 +68,12 @@ function renderOneCharacter(disneyDataObj) {
   if (elemIndex !== -1) {
     elemClass = 'card__fav';
   }
+  if (disneyDataObj.imageUrl === undefined) {
+    disneyDataObj.imageUrl = emptyURL;
+  }
+  //jean geary 2585
   let html = `<li id="${disneyDataObj._id}" class="card ${elemClass} js_card">
-                <article class="character__box">
+                <article class="character">
                 <img class="character__img js_img" src="${disneyDataObj.imageUrl}" alt="Disney Characters" />
                 <p class="character__name js_name">${disneyDataObj.name}</p>
                 </article>
@@ -73,6 +81,7 @@ function renderOneCharacter(disneyDataObj) {
   return html;
 }
 
+/* 
 function addBtnDelete () {
   if (cardElem.classList.contains('card__fav')) {
     const deleteBtn = document.createElement('div');
@@ -81,6 +90,14 @@ function addBtnDelete () {
     cardElem.appendChild(deleteBtn);
   }
 }
+*/
+
+/*
+  <div class="card__btn js-btn"><button class="card__btn--x js_close-btn">x</button></div>
+    const deleteBtn = document.createElement('div');
+    //const deleteBtnX = document.createTextNode('x');
+    cardElem.appendChild(deleteBtn);
+*/
 
 
 function addEventCards () {
@@ -126,11 +143,11 @@ function renderFavCardList () {
 cardElem.classList.contains('card')
 */
 
-// EVENTS
+// FETCH SEARCH
 const handleSearch = (event) => {
   event.preventDefault();
   const inputValue = inputSearch.value;
-  fetch(`https://api.disneyapi.dev/character?pageSize=50&name=${inputValue}`)
+  fetch(serverSearchURL+`${inputValue}`)
     .then((response) => response.json())
     .then((listData) => {
       disneyDataList = listData.data;
@@ -142,35 +159,25 @@ const handleSearch = (event) => {
   renderAllCharacters(filterCharacter); */
 };
 
+const handleReset = (event) => {
+  event.preventDefault();
+  console.log('holis');
+  // cardListFav.innerHTML = '';
+  // localStorage.removeItem('lsFavCards');
+};
+
+// EVENTS
 btnSearch.addEventListener('click', handleSearch);
+resetBtn.addEventListener('click', handleReset);
 
 
 
+/* PENDIENTE:
+  3.1- Color de fondo y texto se intercambia mal
 
-// PENDIENTE:
-
-/*
-2.a.- Cuando no haya imagen poner una tipo placeholder:
-https://via.placeholder.com/210x295/ffffff/555555/?text=Disney
-
-3.1- Color de fondo y texto se intercambia
-
-
-5.- Búsqueda: Qué es lo de conectarse a la API? Como lo de StarWars?
-
-6.- Borrar favoritos, tanto con un click como con del almacenamiento local.
-
-
+  6.- Borrar favoritos, tanto con un click como con del almacenamiento local.
+ Añadir botón X al listado de FAVORITOS 
+ y después evento para borrar desde Local Storage
+localStorage.removeItem('lsFavCards');
 */
 
-// DUDAS:
-
-/*
-3.1.a- Se cambia el color en favoritos o en el listado general. 
-3.1.b- Asignar la clase al elemento, error.
-
-5.a- Búsqueda: Qué es lo de conectarse a la API? Buscar por algo más además del nombre?
-5.b- Mantener las búsquedas.
-
-
-*/
