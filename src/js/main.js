@@ -14,6 +14,7 @@ console.log(cardElem);
 
 // VARIABLES
 const serverURL = `https://api.disneyapi.dev/character?page=50`;
+//const serverSearchURL = `https://api.disneyapi.dev/character?name=Mickey%20Mouse`;
 
 let disneyDataList = [];
 let disneyDataListFav = [];
@@ -45,6 +46,7 @@ const getApiData = () => {
     });
 };
 getApiData ();
+
 
 // FUNCTIONS
 /* */
@@ -115,24 +117,26 @@ cardElem.classList.contains('card')
 */
 
 // EVENTS
-// event.preventDefault();
 
 const handleSearch = (event) => {
   event.preventDefault();
-  console.log('he hecho click');
   const inputValue = inputSearch.value;
-  console.log(inputValue);
-  //const filterCharacter = disneyDataList.filter((elem) => elem.name.toLowerCase().includes(inputValue.toLowerCase()));
-  
-
+  fetch(`https://api.disneyapi.dev/character?pageSize=50&name=${inputValue}`)
+    .then((response) => response.json())
+    .then((listData) => {
+      disneyDataList = listData.data;
+      renderAllCharacters(disneyDataList);
+    });
+  /*
+  const filterCharacter = disneyDataList.filter((elem) => elem.name.toLowerCase().includes(inputValue.toLowerCase()));
   console.log(filterCharacter);
-  renderAllCharacters(filterCharacter);
+  renderAllCharacters(filterCharacter); */
 };
 
 btnSearch.addEventListener('click', handleSearch);
 
 
-  
+
 
 // PENDIENTE:
 
@@ -143,7 +147,7 @@ https://via.placeholder.com/210x295/ffffff/555555/?text=Disney
 3.1- Color de fondo y texto se intercambia
 
 
-5.- Búsqueda: Qué es lo de conectarse a la API? 
+5.- Búsqueda: Qué es lo de conectarse a la API? Como lo de StarWars?
 
 6.- Borrar favoritos, tanto con un click como con del almacenamiento local.
 
