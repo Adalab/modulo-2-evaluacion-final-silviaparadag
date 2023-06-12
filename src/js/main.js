@@ -14,7 +14,7 @@ console.log(cardElem);
 
 // VARIABLES
 const serverURL = `https://api.disneyapi.dev/character?page=50`;
-//const serverSearchURL = `https://api.disneyapi.dev/character?name=Mickey%20Mouse`;
+//const serverSearchURL = `https://api.disneyapi.dev/character?pageSize=50&name=`;
 
 let disneyDataList = [];
 let disneyDataListFav = [];
@@ -62,7 +62,7 @@ function renderOneCharacter(disneyDataObj) {
   const elemIndex = disneyDataListFav.findIndex( (elem) => elem._id === disneyDataObj._id );
   let elemClass = '' ;
   if (elemIndex !== -1) {
-    elemClass = 'card_fav';
+    elemClass = 'card__fav';
   }
   let html = `<li id="${disneyDataObj._id}" class="card ${elemClass} js_card">
                 <article class="character__box">
@@ -73,7 +73,16 @@ function renderOneCharacter(disneyDataObj) {
   return html;
 }
 
-/* */
+function addBtnDelete () {
+  if (cardElem.classList.contains('card__fav')) {
+    const deleteBtn = document.createElement('div');
+    const deleteBtnX = document.createTextNode('x');
+    deleteBtn.appendChild(deleteBtnX);
+    cardElem.appendChild(deleteBtn);
+  }
+}
+
+
 function addEventCards () {
   const cardElemList = document.querySelectorAll('.js_card');
   for( const card of cardElemList ) {
@@ -99,6 +108,7 @@ function handleFav (ev) {
   }
   setInLocalStorage ();
   renderFavCardList ();
+  //addBtnDelete ();
 }
 
 function renderFavCardList () {
@@ -117,7 +127,6 @@ cardElem.classList.contains('card')
 */
 
 // EVENTS
-
 const handleSearch = (event) => {
   event.preventDefault();
   const inputValue = inputSearch.value;
