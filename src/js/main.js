@@ -8,7 +8,7 @@ const cardListFav = document.querySelector('.js_list_fav');
 const cardElem = document.querySelector('.js_card');
 const inputSearch = document.querySelector('.js_inputSearch');
 const btnSearch = document.querySelector('.js_btnSearch');
-const resetBtn  = document.querySelector('.js_resetBtn');
+const resetBtn  = document.querySelector('.js-reset');
 //const deleteFavBtn = document.querySelector('.js_close-btn');
 
 
@@ -72,11 +72,11 @@ function renderOneCharacter(disneyDataObj) {
     disneyDataObj.imageUrl = emptyURL;
   }
   //jean geary 2585
-  let html = `<li id="${disneyDataObj._id}" class="card ${elemClass} js_card">
-                <article class="character">
-                <img class="character__img js_img" src="${disneyDataObj.imageUrl}" alt="Disney Characters" />
-                <p class="character__name js_name">${disneyDataObj.name}</p>
-                </article>
+  let html = `<li id="${disneyDataObj._id}" class="card ${elemClass} js_card">`;
+  html += `<article class="character">`;
+  html += `<img class="character__img js_img" src="${disneyDataObj.imageUrl}" alt="Disney Characters" />`;
+  html += `<p class="character__name js_name">${disneyDataObj.name}</p>`;
+  html += `</article>
             </li>`;
   return html;
 }
@@ -158,13 +158,14 @@ const handleSearch = (event) => {
   console.log(filterCharacter);
   renderAllCharacters(filterCharacter); */
 };
+console.log('HOLIS');
 
-const handleReset = (event) => {
-  event.preventDefault();
-  console.log('holis');
-  // cardListFav.innerHTML = '';
-  // localStorage.removeItem('lsFavCards');
-};
+function handleReset () {
+  console.log('He hecho click');
+  localStorage.removeItem('lsFavCards');
+  cardListFav.innerHTML = '';
+  renderFavCardList ();
+}
 
 // EVENTS
 btnSearch.addEventListener('click', handleSearch);
