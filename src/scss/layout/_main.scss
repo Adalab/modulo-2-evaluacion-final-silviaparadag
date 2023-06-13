@@ -8,19 +8,8 @@
     &__section {
         display: flex;
         flex-direction: row;
+        padding: 0 40px;
     }
-}
-
-.favorites {
-    padding: 10px 0 40px 40px;
-    text-align: center;
-    width: 20vw;
-
-    &__title {
-        color: lightseagreen;
-        padding-bottom: 15px;
-    }
-
 }
 
 .section1 {
@@ -33,7 +22,6 @@
     color: purple;
     background-color: white;
     box-shadow: 0 2px 4px lightpink;
-    //border: 3px yellow dotted;
     margin-top: -35px;
 }
 
@@ -42,6 +30,8 @@
         width: 40vw;
         height: 30px;
         border: 2px purple dotted;
+        padding-left: 10px;
+        color: purple;
     }
 
     &__input--btn {
@@ -54,31 +44,50 @@
     }
 }
 
+.favorites {
+    padding: 10px 0 40px 40px;
+    text-align: center;
+    width: 30vw;
+
+    &__title {
+        color: lightseagreen;
+        padding-bottom: 15px;
+        margin: 0 25px;
+        border-bottom: lightseagreen 1px dotted;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 20px 0;
+
+    }
+}
+
 .section2 {
     padding: 10px 0 40px;
     text-align: center;
-    width: 80vw;
+    width: 70vw;
 
     &__title {
         color: purple;
         padding-bottom: 15px;
+        margin: 0 25px;
+        border-bottom: purple 1px dotted;
     }
-}
 
-.list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-
-.favorites__list {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 10px 0;
+        margin-top: 10px;
+    }
 }
 
 .card {
@@ -87,7 +96,7 @@
     box-shadow: 0 1px 2px lightpink;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     background-color: white;
     text-align: center;
@@ -100,15 +109,61 @@
     box-shadow: 0 1px 2px lightseagreen;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    color: #0e5f5b;
     background-color: rgba(32, 178, 171, 0.387);
     text-align: center;
     cursor: pointer;
 }
 
-.character__img {
-    width: 80%;
-    height: 250px;
-    object-fit: cover;
+.card__btn {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: -20px;
+    margin-top: -30px;
+
+    &--x {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(32, 178, 171, 0.387);
+        color: #0e5f5b;
+        position: relative;
+        border: 2px #0e5f5b dotted;
+        border-radius: 11px;
+        width: 22px;
+        height: 22px;
+        padding: 3px;
+        cursor: pointer;
+    }
+}
+
+.character {
+    &__img {
+        width: 80%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    &__name {
+        padding-top: 15px;
+    }
+}
+
+.reset {
+    height: 80px;
+    margin-top: 20px;
+
+    &__btn {
+        width: 100px;
+        height: 40px;
+        border-radius: 20px;
+        border: none;
+        background-color: gray;
+        color: white;
+        cursor: pointer;
+    }
 }
