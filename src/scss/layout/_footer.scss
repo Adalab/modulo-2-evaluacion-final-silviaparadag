@@ -6,8 +6,17 @@
     font-family: $font-main;
     font-size: 0.8rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     bottom: 0;
+    padding: 0 20px;
+
+    &__text {
+        font-weight: bold;
+    }
+}
+
+.quote {
+    font-style: italic;
 }

@@ -19,9 +19,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: purple;
-    background-color: white;
-    box-shadow: 0 2px 4px lightpink;
+    color: $color-primary;
+    background-color: $color-white;
+    box-shadow: 0 1px 3px $color-primary;
     margin-top: -35px;
 }
 
@@ -29,18 +29,23 @@
     &__input--search {
         width: 40vw;
         height: 30px;
-        border: 2px purple dotted;
+        border: 2px $color-primary dotted;
         padding-left: 10px;
-        color: purple;
+        color: $color-primary;
     }
 
     &__input--btn {
         width: 80px;
         height: 30px;
-        background-color: purple;
-        color: white;
+        background-color: $color-primary;
+        color: $color-white;
         border-radius: 15px;
         border: none;
+
+        &:hover {
+            box-shadow: 0 2px 5px $color-secondary-two;
+            transition: all 0.2s ease;
+        }
     }
 }
 
@@ -50,10 +55,10 @@
     width: 30vw;
 
     &__title {
-        color: lightseagreen;
+        color: $color-secondary;
         padding-bottom: 15px;
         margin: 0 25px;
-        border-bottom: lightseagreen 1px dotted;
+        border-bottom: $color-secondary 1px dotted;
     }
 
     &__list {
@@ -73,10 +78,10 @@
     width: 70vw;
 
     &__title {
-        color: purple;
+        color: $color-primary;
         padding-bottom: 15px;
         margin: 0 25px;
-        border-bottom: purple 1px dotted;
+        border-bottom: $color-primary 1px dotted;
     }
 
     &__list {
@@ -93,12 +98,12 @@
 .card {
     width: 250px;
     height: 350px;
-    box-shadow: 0 1px 2px lightpink;
+    box-shadow: 0 1px 2px $color-secondary-two;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-color: white;
+    background-color: $color-white;
     text-align: center;
     cursor: pointer;
 }
@@ -106,13 +111,13 @@
 .card__fav {
     width: 250px;
     height: 350px;
-    box-shadow: 0 1px 2px lightseagreen;
+    box-shadow: 0 1px 2px $color-secondary;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    color: #0e5f5b;
-    background-color: rgba(32, 178, 171, 0.387);
+    color: $color-secondary-three;
+    background-color: $color-secondary-four;
     text-align: center;
     cursor: pointer;
 }
@@ -129,15 +134,20 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: rgba(32, 178, 171, 0.387);
-        color: #0e5f5b;
+        background-color: $color-secondary-four;
+        color: $color-secondary-three;
         position: relative;
-        border: 2px #0e5f5b dotted;
+        border: 2px $color-secondary-three dotted;
         border-radius: 11px;
         width: 22px;
         height: 22px;
         padding: 3px;
         cursor: pointer;
+
+        &:hover {
+            box-shadow: 0 2px 4px $color-grey-one;
+            transition: all 0.2s ease;
+        }
     }
 }
 
@@ -162,8 +172,15 @@
         height: 40px;
         border-radius: 20px;
         border: none;
-        background-color: gray;
-        color: white;
+        background-color: $color-grey-one;
+        color: $color-white;
         cursor: pointer;
+
+        &:hover {
+            color: $color-secondary;
+            box-shadow: 0 2px 2px $color-secondary;
+            transition: all 0.2s ease;
+            font-size: 1.2rem;
+        }
     }
 }
