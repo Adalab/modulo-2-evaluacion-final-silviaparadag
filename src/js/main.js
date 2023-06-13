@@ -1,6 +1,4 @@
 'use strict';
-/* */
-console.log('>> Ready :)');
 
 // QUERIES
 const cardList = document.querySelector('.js_list');
@@ -9,8 +7,6 @@ const cardElem = document.querySelector('.js_card');
 const inputSearch = document.querySelector('.js_inputSearch');
 const btnSearch = document.querySelector('.js_btnSearch');
 const resetBtn  = document.querySelector('.js-reset');
-//const deleteFavBtn = document.querySelector('.js_close-btn');
-
 
 
 // VARIABLES API
@@ -39,7 +35,6 @@ getFromLocalStorage();
 
 
 //FETCH
-/* */
 const getApiData = () => {
   fetch(serverURL)
     .then((response) => response.json())
@@ -53,7 +48,6 @@ getApiData ();
 
 
 // FUNCTIONS
-/* */
 function renderAllCharacters (list) {
   cardList.innerHTML = '';
   for (const eachCharacter of list ) {
@@ -62,17 +56,20 @@ function renderAllCharacters (list) {
   addEventCards();
 }
 
-function renderOneCharacter(disneyDataObj) {
+function renderOneCharacter(disneyDataObj, isFav) {
   const elemIndex = disneyDataListFav.findIndex( (elem) => elem._id === disneyDataObj._id );
   let elemClass = '' ;
+  let btnDelete = '';
+  if (isFav) {
+    btnDelete = '<div class="card__btn js_deleteFav"><button class="card__btn--x js_deleteFav-btn">x</button></div>';
+  }
   if (elemIndex !== -1) {
     elemClass = 'card__fav';
   }
   if (disneyDataObj.imageUrl === undefined) {
     disneyDataObj.imageUrl = emptyURL;
   }
-  //jean geary 2585
-  let html = `<li id="${disneyDataObj._id}" class="card ${elemClass} js_card">`;
+  let html = `<li id="${disneyDataObj._id}" class="card ${elemClass} js_card"> ${btnDelete}`;
   html += `<article class="character">`;
   html += `<img class="character__img js_img" src="${disneyDataObj.imageUrl}" alt="Disney Characters" />`;
   html += `<p class="character__name js_name">${disneyDataObj.name}</p>`;
@@ -81,34 +78,12 @@ function renderOneCharacter(disneyDataObj) {
   return html;
 }
 
-/* 
-function addBtnDelete () {
-  if (cardElem.classList.contains('card__fav')) {
-    const deleteBtn = document.createElement('div');
-    const deleteBtnX = document.createTextNode('x');
-    deleteBtn.appendChild(deleteBtnX);
-    cardElem.appendChild(deleteBtn);
-  }
-}
-*/
-
-/*
-  <div class="card__btn js-btn"><button class="card__btn--x js_close-btn">x</button></div>
-    const deleteBtn = document.createElement('div');
-    //const deleteBtnX = document.createTextNode('x');
-    cardElem.appendChild(deleteBtn);
-*/
-
-
 function addEventCards () {
   const cardElemList = document.querySelectorAll('.js_card');
   for( const card of cardElemList ) {
     card.addEventListener ('click', handleFav);
-    //card.classList.toggle('card');
-    //card.classList.toggle('card_fav');
   }
 }
-
 
 function handleFav (ev) {
   event.preventDefault();
@@ -125,23 +100,18 @@ function handleFav (ev) {
   }
   setInLocalStorage ();
   renderFavCardList ();
-  //addBtnDelete ();
 }
 
 function renderFavCardList () {
   cardListFav.innerHTML = '';
   for ( const fav of disneyDataListFav) {
-    cardListFav.innerHTML += renderOneCharacter(fav);
-    //changeColor(fav);
+    cardListFav.innerHTML += renderOneCharacter(fav, true);
+  }
+  const deleteFavBtn = document.querySelectorAll('.js_deleteFav');
+  for( const eachFav of deleteFavBtn ) {
+    eachFav.addEventListener('click', handleDelete);
   }
 }
-
-
-/*
-.classList.add('card_fav');
-.classList.remove('card');
-cardElem.classList.contains('card')
-*/
 
 // FETCH SEARCH
 const handleSearch = (event) => {
@@ -153,32 +123,29 @@ const handleSearch = (event) => {
       disneyDataList = listData.data;
       renderAllCharacters(disneyDataList);
     });
-  /*
-  const filterCharacter = disneyDataList.filter((elem) => elem.name.toLowerCase().includes(inputValue.toLowerCase()));
-  console.log(filterCharacter);
-  renderAllCharacters(filterCharacter); */
 };
 console.log('HOLIS');
 
 function handleReset () {
   console.log('He hecho click');
+  disneyDataListFav = [];
+  renderFavCardList ();
   localStorage.removeItem('lsFavCards');
-  cardListFav.innerHTML = '';
+  if (cardElem.classList.contains('card_fav')) {
+    cardElem.classList.remove('card_fav');
+  }
+  renderAllCharacters();
+}
+
+function handleDelete (event) {
+  event.preventDefault();
+  console.log('He hecho click en la X');
+  const id = parseInt(event.currentTarget.id);
+  const indexCard = disneyDataListFav.findIndex( (elem) => elem._id === id);
+  disneyDataListFav.splice(indexCard, 1);
   renderFavCardList ();
 }
 
 // EVENTS
 btnSearch.addEventListener('click', handleSearch);
 resetBtn.addEventListener('click', handleReset);
-
-
-
-/* PENDIENTE:
-  3.1- Color de fondo y texto se intercambia mal
-
-  6.- Borrar favoritos, tanto con un click como con del almacenamiento local.
- Añadir botón X al listado de FAVORITOS 
- y después evento para borrar desde Local Storage
-localStorage.removeItem('lsFavCards');
-*/
-
