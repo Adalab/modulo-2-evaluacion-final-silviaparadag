@@ -4,7 +4,6 @@
 const sectionFav = document.querySelector('.js_fav');
 const cardList = document.querySelector('.js_list');
 const cardListFav = document.querySelector('.js_list_fav');
-const divBtn = document.querySelector('.js_div');
 const inputSearch = document.querySelector('.js_inputSearch');
 const btnSearch = document.querySelector('.js_btnSearch');
 const resetBtn  = document.querySelector('.js-reset');
@@ -127,28 +126,28 @@ function renderOneCharacter(disneyDataObj, isFav) {
     disneyDataObj.imageUrl = emptyURL;
   }
   const li = document.createElement('li');
+  const div = document.createElement('div');
   const art = document.createElement('article');
   const img = document.createElement('img');
   const para = document.createElement('p');
   const paraText = document.createTextNode(disneyDataObj.name);
   li.setAttribute('id', `${disneyDataObj._id}`);
   li.classList.add(`card`);
+  div.classList.add('card__btn','js_div', 'js_deleteFav');
   art.classList.add('character');
   img.setAttribute('src', `${disneyDataObj.imageUrl}`);
   img.setAttribute('alt', `Disney Characters image: ${disneyDataObj.name}`);
   img.classList.add('character__img', 'js_img');
   para.classList.add('character__name', 'js_name');
+  li.appendChild(div);
   li.appendChild(art);
   art.appendChild(img);
   art.appendChild(para);
   para.appendChild(paraText);
   if (isFav) {
-    const div = document.createElement('div');
     const btnDel = document.createElement('button');
     const btnDelTex = document.createTextNode('X');
-    div.classList.add('card__btn','js_div', 'js_deleteFav');
     btnDel.classList.add('card__btn--x', 'js_deleteFav-btn');
-    li.appendChild(div);
     div.appendChild(btnDel);
     btnDel.appendChild(btnDelTex);}
   else {
