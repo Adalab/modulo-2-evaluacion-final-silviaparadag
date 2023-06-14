@@ -6,6 +6,7 @@ const cardListFav = document.querySelector('.js_list_fav');
 const inputSearch = document.querySelector('.js_inputSearch');
 const btnSearch = document.querySelector('.js_btnSearch');
 const resetBtn  = document.querySelector('.js-reset');
+const logBtn = document.querySelector('.js_btnLog');
 
 
 // VARIABLES API
@@ -79,6 +80,7 @@ function renderOneCharacter(disneyDataObj, isFav) {
   html += `<article class="character">`;
   html += `<img class="character__img js_img" src="${disneyDataObj.imageUrl}" alt="Disney Characters" />`;
   html += `<p class="character__name js_name">${disneyDataObj.name}</p>`;
+  html += `<a href="${disneyDataObj.sourceUrl}">${disneyDataObj.sourceUrl}</a>`;
   html += `</article>
             </li>`;
   return html;
@@ -142,6 +144,14 @@ function handleDelete (event) {
   renderAllCharacters(disneyDataList);
 }
 
+function handleLog (ev) {
+  ev.preventDefault();
+  for ( const eachFav of disneyDataListFav) {
+    console.log(eachFav.name);
+  }
+};
+
 // EVENTS
 btnSearch.addEventListener('click', handleSearch);
 resetBtn.addEventListener('click', handleReset);
+logBtn.addEventListener('click', handleLog);
