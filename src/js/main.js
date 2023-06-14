@@ -4,6 +4,7 @@
 const sectionFav = document.querySelector('.js_fav');
 const cardList = document.querySelector('.js_list');
 const cardListFav = document.querySelector('.js_list_fav');
+const divBtn = document.querySelector('.js_div');
 const inputSearch = document.querySelector('.js_inputSearch');
 const btnSearch = document.querySelector('.js_btnSearch');
 const resetBtn  = document.querySelector('.js-reset');
@@ -86,7 +87,7 @@ Siguiendo las indicaciones de la documentación de la API de Disney, cogemos la 
 
 // FUNCTIONS
 // en esta función de renderOneCharacter tenemos 2 parámetros, el segundo es el que utilizaremos para saber si es Favorito.
-/* */
+/* 
 function renderOneCharacter(disneyDataObj, isFav) {
   const elemIndex = disneyDataListFav.findIndex( (elem) => elem._id === disneyDataObj._id );
   //buscamos el elemento donde nos coincide el id, entre disneyDataListFav y disneyDataObj (que es el el primer parámetro de esta función). findIndex nos da la posición del primer elemento que coincide con eso.
@@ -117,58 +118,53 @@ function renderOneCharacter(disneyDataObj, isFav) {
             </li>`;
   return html;
 }
-
+*/
 
 /*  Añadir elementos con DOM  */
-/* function renderOneCharacter(disneyDataObj, isFav) {
+function renderOneCharacter(disneyDataObj, isFav) {
   const elemIndex = disneyDataListFav.findIndex( (elem) => elem._id === disneyDataObj._id );
-  let elemClass = '' ;
-  let btnDelete = '';
-  if (isFav) {
-    btnDelete = 'X';
-  } else {
-    elemClass = 'js_card';
-  }
-  if (elemIndex !== -1) {
-    elemClass += `card__fav` + `,`;
-  }
   if (disneyDataObj.imageUrl === undefined) {
     disneyDataObj.imageUrl = emptyURL;
   }
   const li = document.createElement('li');
-  const div = document.createElement('div');
-  const btnDel = document.createElement('button');
-  const btnDelTex = document.createTextNode(`${btnDelete}`);
   const art = document.createElement('article');
   const img = document.createElement('img');
   const para = document.createElement('p');
   const paraText = document.createTextNode(disneyDataObj.name);
   li.setAttribute('id', `${disneyDataObj._id}`);
-  li.classList.add(`card`, `${elemClass}`);
-  div.classList.add('card__btn','js_deleteFav');
-  btnDel.classList.add('card__btn--x', 'js_deleteFav-btn');
+  li.classList.add(`card`);
   art.classList.add('character');
   img.setAttribute('src', `${disneyDataObj.imageUrl}`);
   img.setAttribute('alt', `Disney Characters image: ${disneyDataObj.name}`);
   img.classList.add('character__img', 'js_img');
   para.classList.add('character__name', 'js_name');
-  // cardList.appendChild(li); esta no vale, solo era para probar.
-  li.appendChild(div);
-  div.appendChild(btnDel);
-  btnDel.appendChild(btnDelTex);
   li.appendChild(art);
   art.appendChild(img);
   art.appendChild(para);
   para.appendChild(paraText);
+  if (isFav) {
+    const div = document.createElement('div');
+    const btnDel = document.createElement('button');
+    const btnDelTex = document.createTextNode('X');
+    div.classList.add('card__btn','js_div', 'js_deleteFav');
+    btnDel.classList.add('card__btn--x', 'js_deleteFav-btn');
+    li.appendChild(div);
+    div.appendChild(btnDel);
+    btnDel.appendChild(btnDelTex);}
+  else {
+    li.classList.add('js_card');
+  }
+  if (elemIndex !== -1) {
+    li.classList.add(`card__fav`);
+  }
   return li;
 }
-*/
 
 function renderAllCharacters (list) {
   cardList.innerHTML = '';
   //cardList es nuestra lista en HTML, 
   for (const eachCharacter of list ) {
-    cardList.innerHTML += renderOneCharacter(eachCharacter);
+    cardList.appendChild(renderOneCharacter(eachCharacter));
   }
   addEventCards();
 }
@@ -187,7 +183,7 @@ function renderFavCardList () {
   cardListFav.innerHTML = '';
   // disneyDataListFav es la variable que hemos creado para contener todos los favoritos.
   for ( const fav of disneyDataListFav) {
-    cardListFav.innerHTML += renderOneCharacter(fav, true);
+    cardListFav.appendChild(renderOneCharacter(fav, true));
     //tiene dos parámetros, cada elemento y aquí es donde le decimos que isFav(y), el segundo parámetro de renderOneCharacter( x, y) es true.
   }
   // 6️⃣ ⏩️
